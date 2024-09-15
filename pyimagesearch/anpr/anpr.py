@@ -6,7 +6,7 @@ import imutils
 import cv2
 
 class PyImageSearchANPR:
-	def __init__(self, minAR=4, maxAR=5, debug=True):
+	def __init__(self, minAR=4, maxAR=9, debug=True):
 		# store the minimum and maximum rectangular aspect ratio
 		# values along with whether or not we are in debug mode
 		self.minAR = minAR
@@ -140,6 +140,7 @@ class PyImageSearchANPR:
 		# candidates, leaving us with the *actual* license plate
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 		candidates = self.locate_license_plate_candidates(gray)
+		print("Kandidati: ", candidates)
 		(lp, lpCnt) = self.locate_license_plate(gray, candidates,
 												clearBorder=clearBorder)
 
