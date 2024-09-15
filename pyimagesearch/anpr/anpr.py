@@ -4,6 +4,7 @@ import pytesseract
 import numpy as np
 import imutils
 import cv2
+import numpy
 
 class PyImageSearchANPR:
 	def __init__(self, minAR=4, maxAR=9, debug=True):
@@ -141,7 +142,7 @@ class PyImageSearchANPR:
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 		candidates = self.locate_license_plate_candidates(gray)
 		print("Kandidati: ", candidates)
-		(lp, lpCnt) = self.locate_license_plate(gray, candidates,
+		(lp, lpCnt) = self.locate_license_plate(gray, numpy.float32(candidates).reshape(-1, 2),
 												clearBorder=clearBorder)
 
 		# only OCR the license plate if the license plate ROI is not
